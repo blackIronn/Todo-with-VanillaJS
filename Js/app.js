@@ -20,7 +20,11 @@ const createTodo = () => {
 const showTodo = () => {
 
     const todoArea = document.getElementById("todo-cards");
-    todoArea.innerHTML = todoList.map(todo => `<div class= "card">${todo}</div>`).join('');
+    todoArea.innerHTML = todoList
+        .map(todo => `<div class= "card">${todo}
+            <button type="button" class="change-status" onclick="changeStatus()">...</button>
+            </div>`)
+        .join('');
 
     const todoCount = document.getElementById("todo-count");
     todoCount.innerHTML = todoList.length;
@@ -29,7 +33,11 @@ const showTodo = () => {
 const showInProgress = () => {
 
     const inProgressArea = document.getElementById("inprogress-cards");
-    inProgressArea.innerHTML = inProgressList.map(inProgress => `<div class="card">${inProgress}</div>`);
+    inProgressArea.innerHTML = inProgressList
+        .map(inProgress => `<div class="card">${inProgress}
+            <button type="button" class="change-status" onclick="changeStatus()">...</button>
+            </div>`)
+        .join('');
 
     const inProgressCount = document.getElementById("inprogress-count");
     inProgressCount.innerHTML = inProgressList.length;
@@ -38,16 +46,26 @@ const showInProgress = () => {
 const showClosed = () => {
 
     const closedArea = document.getElementById("closed-cards");
-    inProgressArea.innerHTML = closedList.map(closed => `<div class="card">${closed}</div>`);
+    closedArea.innerHTML = closedList
+        .map(closed => `<div class="card">${closed}
+            <button type="button" class="change-status" onclick="changeStatus()">...</button>
+            </div>`)
+        .join('');
 
     const closedCount = document.getElementById("closed-count");
     closedCount.innerHTML = closedList.length;
 }
 
+const resetInput = () => {
+    document.getElementById("create-todo").value = "";
+}
 
 const updateStatus = () => {
     showTodo();
-    showInProgress();
-    showClosed();
+    //showInProgress();
+    //showClosed();
+
+    resetInput();
 }
+
 
