@@ -5,15 +5,11 @@ body{
     align-items: center;
     justify-content: center;
 
-    /*background-color: rgb(44, 43, 43);*/
-
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .input-box{
-    border: 1px solid;
-    border-radius: 5px;
-    /* üstteki borderları kaldıracam */
+    border-radius: 8px;
 
 
     width: 1300px;
@@ -34,7 +30,7 @@ body{
     
     border: none;
     border: 1px solid;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .create-button{
@@ -44,7 +40,7 @@ body{
     height: 50px;
 
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
 
     color: white;
 }
@@ -54,9 +50,7 @@ body{
 }
 
 .todo-list{
-    border: 1px solid;
-    border-radius: 5px;
-    /* üstteki borderları kaldıracam */
+    border-radius: 8px;
 
 
     width: 1300px;
@@ -70,25 +64,16 @@ body{
 }
 
 .todo-area{
-    /* border: 1px solid;
-    border-radius: 5px; */
-
     width: 250px;
     height: 100%;
 }
 
 .inprogress-area{
-    /* border: 1px solid;
-    border-radius: 5px; */
-
     width: 250px;
     height: 100%;
 }
 
 .closed-area{
-    /* border: 1px solid;
-    border-radius: 5px; */
-
     width: 250px;
     height: 100%;
 }
@@ -97,7 +82,7 @@ body{
     width: 100%;
     height: 50px;
     background-color: #64748D;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
 
     display: flex;
@@ -107,14 +92,14 @@ body{
     box-sizing: border-box;
 
     padding-left: 20px;
-    gap: 5px;
+    gap: 8px;
 }
 
 .inprogress-header{
     width: 100%;
     height: 50px;
     background-color: #A755F7;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
 
     display: flex;
@@ -131,7 +116,7 @@ body{
     width: 100%;
     height: 50px;
     background-color: #22C45D;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
 
     display: flex;
@@ -176,4 +161,22 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.card{
+    width: 100%;
+    height: 60px;
+
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding-left: 16px;
+
+    box-sizing: border-box;
 }
