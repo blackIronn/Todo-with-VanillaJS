@@ -1,0 +1,74 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-box{
+    border: 1px solid;
+    border-radius: 5px;
+    /* üstteki borderları kaldıracam */
+
+
+    width: 1300px;
+    height: 200px;
+
+    margin-top: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+#create-todo{
+    width: 250px;
+    height: 35px;
+    
+    border: none;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.create-button{
+    background-color: #07B7CF;
+
+    width: 75px;
+    height: 40px;
+
+    border: none;
+    border-radius: 5px;
+
+    color: white;
+}
+
+.create-button:hover{
+    background-color: #1497a8;
+}
+
+.todo-list{
+    border: 1px solid;
+    border-radius: 5px;
+    /* üstteki borderları kaldıracam */
+
+
+    width: 1300px;
+    height: 200px;
+}
+
+
+
+
+
+
+
+/*
+
+1. todo  kısmı renk kodu #64748D
+2. in progress renk kodu #A755F7
+3. closed renk kodu #22C45D
+
+*/
