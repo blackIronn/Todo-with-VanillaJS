@@ -1,9 +1,6 @@
-
-
 let todoList = [];
 let inProgressList = [];
 let closedList = [];
-
 
 const getTodoName = () =>{
     let todoName = document.getElementById("create-todo").value;
@@ -12,7 +9,10 @@ const getTodoName = () =>{
 
 const createTodo = () => {
     let todoName = getTodoName();
-    todoList.push(todoName);
+
+    if (todoName !== ""){
+        todoList.push(todoName);
+    }
 
     updateStatus();
 }
