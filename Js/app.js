@@ -104,4 +104,3 @@ const removeTodo = (item) => {
 
     updateStatus(); 
 }
-
