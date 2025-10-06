@@ -2,6 +2,20 @@ let todoList = [];
 let inProgressList = [];
 let closedList = [];
 
+//localStorage.clear();
+
+
+const getTodo = () => {
+    todoList = JSON.parse(localStorage.getItem("todo")) || [];
+    inProgressList = JSON.parse(localStorage.getItem("inProgress")) || [];
+    closedList = JSON.parse(localStorage.getItem("closed")) || [];
+
+    console.log(todoList)
+    updateStatus();
+}
+
+
+
 const getTodoName = () =>{
     let todoName = document.getElementById("create-todo").value;
     return todoName;
@@ -12,6 +26,8 @@ const createTodo = () => {
 
     if (todoName !== ""){
         todoList.push(todoName);
+        localStorage.setItem("todo",JSON.stringify(todoList));
+        todoList = JSON.parse(localStorage.getItem("todo"));
     }
 
     updateStatus();
@@ -87,20 +103,31 @@ const updateStatus = () => {
 
 const addInProgress = (item) => {
     todoList = todoList.filter(todo =>todo !== item);
+    localStorage.setItem("todo", JSON.stringify(todoList));
     inProgressList.push(item);
+    localStorage.setItem("inProgress",JSON.stringify(inProgressList));
+    inProgressList = JSON.parse(localStorage.getItem("inProgress"));
 
     updateStatus();
 }
 
 const addClosed = (item) => {
     inProgressList = inProgressList.filter(todo => todo !== item);
+    localStorage.setItem("inProgress",JSON.stringify(inProgressList));
     closedList.push(item);
+    localStorage.setItem("closed",JSON.stringify(closedList));
+    closedList = JSON.parse(localStorage.getItem("closed"));
 
     updateStatus();
 }
 
 const removeTodo = (item) => {
     closedList = closedList.filter(todo => todo !== item);
+    localStorage.setItem("closed",JSON.stringify(closedList));
+    closedList = JSON.parse(localStorage.getItem("closed"));
 
     updateStatus(); 
 }
+
+getTodo();
+updateStatus();
