@@ -1,14 +1,16 @@
-let todoList = [];
-let inProgressList = [];
-let closedList = [];
 
-//localStorage.clear();
+let {todoList, inProgressList, closedList} = {
+    todoList : [],
+    inProgressList : [],
+    closedList : []
+}
 
+const [todo, inProgress, closed] = ["todo", "inprogress", "closed"];
 
 const getTodo = () => {
-    todoList = JSON.parse(localStorage.getItem("todo")) || [];
-    inProgressList = JSON.parse(localStorage.getItem("inProgress")) || [];
-    closedList = JSON.parse(localStorage.getItem("closed")) || [];
+    todoList = JSON.parse(localStorage.getItem(todo)) || [];
+    inProgressList = JSON.parse(localStorage.getItem(inProgress)) || [];
+    closedList = JSON.parse(localStorage.getItem(closed)) || [];
 
     updateStatus();
 }
@@ -25,8 +27,8 @@ const createTodo = () => {
 
     if (todoName !== ""){
         todoList.push(todoName);
-        localStorage.setItem("todo",JSON.stringify(todoList));
-        todoList = JSON.parse(localStorage.getItem("todo"));
+        localStorage.setItem(todo,JSON.stringify(todoList));
+        todoList = JSON.parse(localStorage.getItem(todo));
     }
 
     updateStatus();
@@ -52,9 +54,9 @@ const resetInput = () => {
 
 const updateStatus = () => {
 
-    showCards("todo", todoList, "addInProgress");
-    showCards("inprogress", inProgressList, "addClosed");
-    showCards("closed", closedList, "removeTodo");
+    showCards(todo, todoList, "addInProgress");
+    showCards(inProgress, inProgressList, "addClosed");
+    showCards(closed, closedList, "removeTodo");
 
     resetInput();
 }
@@ -78,19 +80,19 @@ const changeStatus = (list1, list2, class1, class2, item, isRemoveTodo) => {
 
 const addInProgress = (item) => {
 
-    changeStatus(todoList, inProgressList, "todo", "inProgress", item, false);
+    changeStatus(todoList, inProgressList, todo, inProgress, item, false);
     getTodo();
 }
 
 const addClosed = (item) => {
 
-    changeStatus(inProgressList, closedList, "inProgress", "closed", item, false);
+    changeStatus(inProgressList, closedList, inProgress, closed, item, false);
     getTodo();
 }
 
 const removeTodo = (item) => {
 
-    changeStatus(closedList,todoList, "closed", "todo", item, true);
+    changeStatus(closedList,todoList, closed, todo, item, true);
     getTodo();
 }
 
