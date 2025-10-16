@@ -10,7 +10,6 @@ const getTodo = () => {
     inProgressList = JSON.parse(localStorage.getItem("inProgress")) || [];
     closedList = JSON.parse(localStorage.getItem("closed")) || [];
 
-    console.log(todoList)
     updateStatus();
 }
 
@@ -33,59 +32,18 @@ const createTodo = () => {
     updateStatus();
 }
 
-const showTodo = () => {
 
-    const todoArea = document.getElementById("todo-cards");
-    todoArea.innerHTML = todoList
+const showCards = (className, list, methodName) => {
+    const area = document.getElementById(`${className}-cards`);
+    area.innerHTML = list
         .map(todo => `<div class= "card">${todo}
-            <button type="button" class="change-status" onclick="addInProgress('${todo}')">...</button>
+            <button type="button" class="change-status" onclick="${methodName}('${todo}')">...</button>
             </div>`)
         .join('');
+    
+    const count = document.getElementById(`${className}-count`);
 
-        const todoCount = document.getElementById("todo-count");
-    if (todoList.length > 0){
-        
-        todoCount.innerHTML = todoList.length;
-    }
-    else{
-        todoCount.innerHTML = "0";
-    }
-}
-
-const showInProgress = () => {
-
-    const inProgressArea = document.getElementById("inprogress-cards");
-    inProgressArea.innerHTML = inProgressList
-        .map(inProgress => `<div class="card">${inProgress}
-            <button type="button" class="change-status" onclick="addClosed('${inProgress}')">...</button>
-            </div>`)
-        .join('');
-
-        const inProgressCount = document.getElementById("inprogress-count");
-    if (inProgressList.length > 0){
-        inProgressCount.innerHTML = inProgressList.length;
-    }
-    else{
-        inProgressCount.innerHTML = "0";
-    }
-}
-
-const showClosed = () => {
-
-    const closedArea = document.getElementById("closed-cards");
-    closedArea.innerHTML = closedList
-        .map(closed => `<div class="card">${closed}
-            <button type="button" class="change-status" onclick="removeTodo('${closed}')">...</button>
-            </div>`)
-        .join('');
-
-        const closedCount = document.getElementById("closed-count");
-    if (closedList.length > 0){
-        closedCount.innerHTML = closedList.length;
-    }
-    else{
-        closedCount.innerHTML = "0";
-    }
+    count.innerHTML = list.length || "0";
 }
 
 const resetInput = () => {
@@ -93,41 +51,47 @@ const resetInput = () => {
 }
 
 const updateStatus = () => {
-    showTodo();
-    showInProgress();
-    showClosed();
+
+    showCards("todo", todoList, "addInProgress");
+    showCards("inprogress", inProgressList, "addClosed");
+    showCards("closed", closedList, "removeTodo");
 
     resetInput();
 }
 
 
-const addInProgress = (item) => {
-    todoList = todoList.filter(todo =>todo !== item);
-    localStorage.setItem("todo", JSON.stringify(todoList));
-    inProgressList.push(item);
-    localStorage.setItem("inProgress",JSON.stringify(inProgressList));
-    inProgressList = JSON.parse(localStorage.getItem("inProgress"));
+const changeStatus = (list1, list2, class1, class2, item, isRemoveTodo) => {
+    if (isRemoveTodo){
+        list1 = list1.filter(todo => todo !== item);
+        localStorage.setItem(class1,JSON.stringify(list1));
+        list1 = JSON.parse(localStorage.getItem(class1));
+    }
+    else{
+        list1 = list1.filter(todo => todo !== item);
+        localStorage.setItem(class1, JSON.stringify(list1));
+        list2.push(item);
+        localStorage.setItem(class2,JSON.stringify(list2));
+        list2 = JSON.parse(localStorage.getItem(class2));
+    }
+}
 
-    updateStatus();
+
+const addInProgress = (item) => {
+
+    changeStatus(todoList, inProgressList, "todo", "inProgress", item, false);
+    getTodo();
 }
 
 const addClosed = (item) => {
-    inProgressList = inProgressList.filter(todo => todo !== item);
-    localStorage.setItem("inProgress",JSON.stringify(inProgressList));
-    closedList.push(item);
-    localStorage.setItem("closed",JSON.stringify(closedList));
-    closedList = JSON.parse(localStorage.getItem("closed"));
 
-    updateStatus();
+    changeStatus(inProgressList, closedList, "inProgress", "closed", item, false);
+    getTodo();
 }
 
 const removeTodo = (item) => {
-    closedList = closedList.filter(todo => todo !== item);
-    localStorage.setItem("closed",JSON.stringify(closedList));
-    closedList = JSON.parse(localStorage.getItem("closed"));
 
-    updateStatus(); 
+    changeStatus(closedList,todoList, "closed", "todo", item, true);
+    getTodo();
 }
 
 getTodo();
-updateStatus();
